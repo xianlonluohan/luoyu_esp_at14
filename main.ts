@@ -99,11 +99,15 @@ namespace emakefun {
         do {
             if (!writeCommand("AT+RST", "\r\nOK\r\n", 1000) || !emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
                 cancelSend();
+                basic.showNumber(2);
                 continue;
+
             }
+            basic.showNumber(7);
             if (writeCommand("AT", "\r\nOK\r\n", 100)) {
                 return;
             }
+            basic.showNumber(6);
         } while (input.runningTime() < end_time);
         throw "Error: module restart failed.";
     }
