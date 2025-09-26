@@ -47,8 +47,8 @@ namespace emakefun {
     /**
      * Cancel send.
      */
-    export function cancelSend(): boolean {
-        basic.pause(30);
+    function cancelSend(): boolean {
+        basic.pause(100);
         serial.writeString("+++")
         if (!emakefun.singleFindUtil("\r\nSEND Canceled\r\n", 100)) {
             serial.writeString("\r\n");
