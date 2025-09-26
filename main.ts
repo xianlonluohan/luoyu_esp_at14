@@ -96,17 +96,13 @@ namespace emakefun {
     //% weight=99
     export function restart(timeout_ms: number): void {
         const end_time = input.runningTime() + timeout_ms;
-        let res = 0;
         do {
-            if (writeCommand("AT+RST", "\r\nOK\r\n", 1000) && emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
-                if (writeCommand("AT", "\r\nOK\r\n", 100)) {
-                    return;
-                }
-            } else {
+            if (!writeCommand("AT+RST", "\r\nOK\r\n", 1000) || !emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
                 cancelSend();
-                basic.showNumber(res++);
-                // continue;
-
+                continue;
+            }
+            if (writeCommand("AT", "\r\nOK\r\n", 100)) {
+                return;
             }
         } while (input.runningTime() < end_time);
         throw "Error: module restart failed.";
