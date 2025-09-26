@@ -96,6 +96,7 @@ namespace emakefun {
     //% weight=99
     export function restart(timeout_ms: number): void {
         const end_time = input.runningTime() + timeout_ms;
+        let res = 0;
         do {
             if (writeCommand("AT+RST", "\r\nOK\r\n", 1000) && emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
                 if (writeCommand("AT", "\r\nOK\r\n", 100)) {
@@ -103,7 +104,7 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
-                // basic.showNumber(2);
+                basic.showNumber(res++);
                 // continue;
 
             }
