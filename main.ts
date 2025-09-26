@@ -48,7 +48,7 @@ namespace emakefun {
      * Cancel send.
      */
     function cancelSend(): boolean {
-        basic.pause(50);
+        basic.pause(1000);
         serial.writeString("+++")
         if (!emakefun.singleFindUtil("\r\nSEND Canceled\r\n", 100)) {
             serial.writeString("\r\n");
@@ -96,18 +96,18 @@ namespace emakefun {
     //% weight=99
     export function restart(timeout_ms: number): void {
         const end_time = input.runningTime() + timeout_ms;
+        let res = 0;
         do {
-            if (!writeCommand("AT+RST", "\r\nOK\r\n", 1000) || !emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
+            if (writeCommand("AT+RST", "\r\nOK\r\n", 1000) && emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
+                if (writeCommand("AT", "\r\nOK\r\n", 100)) {
+                    return;
+                }
+            } else {
                 cancelSend();
-                basic.showNumber(2);
-                continue;
+                // basic.showNumber(res++);
+                // continue;
 
             }
-            basic.showNumber(7);
-            if (writeCommand("AT", "\r\nOK\r\n", 100)) {
-                return;
-            }
-            basic.showNumber(6);
         } while (input.runningTime() < end_time);
         throw "Error: module restart failed.";
     }
