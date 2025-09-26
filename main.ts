@@ -96,15 +96,14 @@ namespace emakefun {
     export function restart(timeout_ms: number): void {
         const end_time = input.runningTime() + timeout_ms;
         do {
-            if (!writeCommand("AT+RST", "\r\nOK\r\n", 1000) || !emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
+            if (writeCommand("AT+RST", "\r\nOK\r\n", 1000) && emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
+                if (writeCommand("AT", "\r\nOK\r\n", 100)) {
+                    return;
+                }
+            } else {
                 cancelSend();
                 basic.showNumber(2);
                 continue;
-
-            }
-            basic.showNumber(7);
-            if (writeCommand("AT", "\r\nOK\r\n", 100)) {
-                return;
             }
             basic.showNumber(6);
         } while (input.runningTime() < end_time);
