@@ -102,9 +102,7 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
-                basic.showNumber(2);
             }
-            basic.showNumber(6);
         } while (input.runningTime() < end_time);
         throw "Error: module restart failed.";
     }
