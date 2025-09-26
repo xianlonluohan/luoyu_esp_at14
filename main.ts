@@ -103,8 +103,8 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
-                basic.showNumber(2);
-                continue;
+                // basic.showNumber(2);
+                // continue;
 
             }
         } while (input.runningTime() < end_time);
