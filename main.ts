@@ -68,6 +68,7 @@ namespace emakefun {
     //% baud_rate.defl=BaudRate.BaudRate9600
     //% weight=100
     export function initEspAtModule(): void {
+        serial.readBuffer(0);
         restart(2000);
         const at_commands = [
             "ATE0",
