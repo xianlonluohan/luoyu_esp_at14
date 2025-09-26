@@ -102,7 +102,7 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
-                continue;
+                basic.showNumber(2);
             }
             basic.showNumber(6);
         } while (input.runningTime() < end_time);
