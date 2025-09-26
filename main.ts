@@ -101,8 +101,6 @@ namespace emakefun {
             res += 1;
             if (writeCommand("AT+RST", "\r\nOK\r\n", 1000) && emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
                 if (writeCommand("AT", "\r\nOK\r\n", 100)) {
-                    basic.showNumber(0)
-                    basic.showNumber(res)
                     return;
                 }
             } else {
@@ -113,7 +111,8 @@ namespace emakefun {
 
             }
         } while (input.runningTime() < end_time);
-
+        basic.showNumber(0)
+        basic.showNumber(res)
         throw "Error: module restart failed.";
     }
 
