@@ -69,7 +69,7 @@ namespace emakefun {
     //% weight=100
     export function initEspAtModule(): void {
         serial.readBuffer(0);
-        restart(2000);
+        restart(5000);
         const at_commands = [
             "ATE0",
             "AT+CWINIT=1",
@@ -95,7 +95,6 @@ namespace emakefun {
     //% timeout_ms.defl=2000
     //% weight=99
     export function restart(timeout_ms: number): void {
-        let res = 0;
         const end_time = input.runningTime() + timeout_ms;
         do {
             res += 1;
@@ -105,14 +104,11 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
-                // basic.pause(500);
                 basic.showNumber(2);
                 // continue;
 
             }
         } while (input.runningTime() < end_time);
-        basic.showNumber(0)
-        basic.showNumber(res)
         throw "Error: module restart failed.";
     }
 
