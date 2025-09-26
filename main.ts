@@ -47,7 +47,7 @@ namespace emakefun {
     /**
      * Cancel send.
      */
-    export function cancelSend(): boolean {
+    function cancelSend(): boolean {
         basic.pause(30);
         serial.writeString("+++")
         if (!emakefun.singleFindUtil("\r\nSEND Canceled\r\n", 100)) {
@@ -102,10 +102,7 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
-                basic.showNumber(2);
-                continue;
             }
-            basic.showNumber(6);
         } while (input.runningTime() < end_time);
         throw "Error: module restart failed.";
     }
