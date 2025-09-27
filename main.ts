@@ -102,11 +102,11 @@ namespace emakefun {
                 if (writeCommand("AT", "\r\nOK\r\n", 100)) {
                     return;
                 }
-                // } else {
-                //     cancelSend();
-                //     basic.pause(1000);
-                //     // basic.showNumber(res++);
-                //     // continue;
+            } else {
+                cancelSend();
+                basic.pause(500);
+                // basic.showNumber(res++);
+                // continue;
 
             }
         } while (input.runningTime() < end_time);
