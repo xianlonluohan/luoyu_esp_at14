@@ -48,7 +48,7 @@ namespace emakefun {
      * Cancel send.
      */
     function cancelSend(): boolean {
-        basic.pause(1000);
+        basic.pause(50);
         serial.writeString("+++")
         if (!emakefun.singleFindUtil("\r\nSEND Canceled\r\n", 100)) {
             serial.writeString("\r\n");
@@ -69,7 +69,7 @@ namespace emakefun {
     //% weight=100
     export function initEspAtModule(): void {
         serial.readBuffer(0);
-        restart(5000);
+        restart(10000);
         const at_commands = [
             "ATE0",
             "AT+CWINIT=1",
@@ -104,6 +104,7 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
+                basic.pause(1000);
                 // basic.showNumber(res++);
                 // continue;
 
