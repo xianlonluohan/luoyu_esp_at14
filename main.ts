@@ -104,7 +104,7 @@ namespace emakefun {
                 }
             } else {
                 cancelSend();
-                basic.pause(300);
+                basic.pause(400);
                 // basic.showNumber(res++);
                 // continue;
 
