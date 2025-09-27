@@ -55,8 +55,8 @@ namespace emakefun {
         //     serial.readBuffer(0);
         //     return false;
         // }
-        serial.writeLine("")
-        serial.readBuffer(0);
+        // serial.writeLine("")
+        // serial.readBuffer(0);
         return true;
     }
 
